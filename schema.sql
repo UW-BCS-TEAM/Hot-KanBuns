@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS passport_demo;
-CREATE DATABASE passport_demo;
+DROP DATABASE IF EXISTS hot_kanbuns;
+CREATE DATABASE hot_kanbuns;

@@ -2,3 +2,8 @@ form.signup,
 form.login {
   margin-top: 50px;
 }
+
+.container {
+  border-width: 5px;
+  border-color: black;
+}
