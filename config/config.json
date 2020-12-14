@@ -1,6 +1,7 @@
 {
   "development": {
     "username": "root",
+<<<<<<< HEAD
     "password": "Whispir@2020",
     "database": "passport_demo",
     "host": "127.0.0.1",
@@ -17,6 +18,10 @@
     "username": "root",
     "password": null,
     "database": "database_production",
+=======
+    "password": "password",
+    "database": "hot_kanbuns",
+>>>>>>> f1140c9906cdbf294332fb730808a7ce84e850d2
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
