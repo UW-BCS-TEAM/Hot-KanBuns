@@ -1,6 +1,6 @@
 // Requiring our models and passport as we've configured it
-var db = require("../models");
-var passport = require("../config/passport");
+const db = require("../models");
+const passport = require("../config/passport.js");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -15,6 +15,8 @@ module.exports = function(app) {
   // otherwise send back an error
   app.post("/api/signup", function(req, res) {
     db.User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       email: req.body.email,
       password: req.body.password
     })
@@ -46,4 +48,38 @@ module.exports = function(app) {
       });
     }
   });
+
+
+  // PROJECT ROUTES
+  // ******************
+  // Get all projects by user id or all projects if no id is specified
+  app.get("/api/projects/:userID?", function(req, res){
+    if(req.params.userid){
+      db.Project.findAll({where: {userid: req.params.userid}}).then(function(projectData){
+        res.json(projectData);
+      });
+    }else{
+      db.Project.findAll({}).then(function(projectData){
+        res.json(projectData);
+      }).catch(function(err){
+        res.status(401).json(err);
+      });
+    }
+    
+  });
+
+  app.post("/api/projects/:userID", function(req, res){
+    id = req.params.userid;
+
+    db.Project.create({
+      projectName: req.body.projectName,
+      projectDesc: req.body.projectDesc,
+      userid: id
+    }).then(function(result){
+      res.json(result);
+    });
+  });
+
+  
+  
 };
