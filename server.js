@@ -26,13 +26,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Import routes from our controllers
+const htmlRoutes = require("./controllers/routesController.js");
 const userRoutes = require("./controllers/usersController.js");
 const projectRoutes = require("./controllers/projectsController.js");
 
 // Assign routes to our server
+app.use(htmlRoutes);
 app.use(userRoutes);
 app.use(projectRoutes);
-require("./routes/html-routes.js")(app);
 
 
 // Syncing our database and logging a message to the user upon success

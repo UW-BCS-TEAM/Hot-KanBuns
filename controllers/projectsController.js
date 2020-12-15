@@ -11,8 +11,14 @@ router.get("/api/projects/:userID?", (req, res) => {
     // Check for user authentication before making query
     if(!req.user){
         res.json({Error: "Unauthorized User"});        
-    }else{
+    }
+    if(req.params.userID){
         db.Project.findAll({where: {userid: req.params.userID}}).then(projectData => {
+            res.json(projectData);
+        }); 
+    }
+    else{
+        db.Project.findAll({}).then(projectData => {
             res.json(projectData);
         });       
     }
