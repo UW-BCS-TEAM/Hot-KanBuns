@@ -9,6 +9,7 @@ const passport = require("./config/passport");
 const PORT = process.env.PORT || 8080;
 const db = require("./models");
 
+
 // Creating express app and configuring middleware needed for authentication
 const app = express();
 
@@ -25,9 +26,16 @@ app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true 
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Requiring our routes
-require("./routes/html-routes.js")(app);
-require("./routes/api-routes.js")(app);
+// Import routes from our controllers
+const htmlRoutes = require("./controllers/routesController.js");
+const userRoutes = require("./controllers/usersController.js");
+const projectRoutes = require("./controllers/projectsController.js");
+
+// Assign routes to our server
+app.use(htmlRoutes);
+app.use(userRoutes);
+app.use(projectRoutes);
+
 
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(function() {
@@ -35,3 +43,4 @@ db.sequelize.sync().then(function() {
     console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
   });
 });
+
