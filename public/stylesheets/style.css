@@ -3,7 +3,12 @@ form.login {
   margin-top: 50px;
 }
 
-.container {
-  border-width: 5px;
-  border-color: black;
+.accordion {
+  width: 50%;
+  margin: 50px;
+  margin-top: 55px
+}
+
+#welcome-el {
+  margin: 50px;
 }
