@@ -1,4 +1,3 @@
-
 module.exports = function(sequelize, DataTypes) {
     const Project = sequelize.define("Project", {
         projectName: {
@@ -7,6 +6,10 @@ module.exports = function(sequelize, DataTypes) {
         },
         projectDesc: {
             type: DataTypes.STRING,
+            allowNull: false
+        },
+        userId: {
+            type: DataTypes.INTEGER,
             allowNull: false
         }
     });
