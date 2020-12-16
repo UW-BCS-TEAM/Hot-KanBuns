@@ -30,6 +30,7 @@ const htmlRoutes = require("./controllers/routesController.js");
 const userRoutes = require("./controllers/usersController.js");
 const projectRoutes = require("./controllers/projectsController.js");
 
+
 // Assign routes to our server
 app.use(htmlRoutes);
 app.use(userRoutes);

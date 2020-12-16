@@ -30,4 +30,9 @@ router.get("/members", isAuthenticated, function(req, res) {
     //res.sendFile(path.join(__dirname, "../public/members.html"));
 });
 
+// Catch all unrecognized routes and redirect to a 404 page (This has to be the last route in the list)
+// router.get("*", function(req, res){
+//   res.render("404");
+// });
+
 module.exports = router;

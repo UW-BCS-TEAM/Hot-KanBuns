@@ -42,14 +42,45 @@ router.get("/api/user_data", function(req, res) {
     if (!req.user) {
         // The user is not logged in, send back an empty object
       res.json({});
-    } else {
-      // Otherwise send back the user's email and id
-      // Sending back a password, even a hashed password, isn't a good idea
+    }else {
+    // Otherwise send back the user's email and id
+    // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         email: req.user.email,
-        id: req.user.id
-      });
+        id: req.user.id    
+      });  
     }
 });  
+
+router.get("/api/users/:userID?", async function(req, res){ 
+  if(!req.user){
+    res.json({});
+  }else if(req.params.userID) {
+    db.User.findAll({where: {id: parseInt(req.params.userID) }}).then(function(userData){
+      console.log(userData);
+      res.json({
+        id: userData[0].dataValues.id,
+        email: userData[0].dataValues.email,
+        firstName: userData[0].dataValues.firstName,
+        lastName: userData[0].dataValues.lastName
+      });
+    });      
+  }else{
+    db.User.findAll({}).then(function(userData){
+      let userList = [];
+      userData.forEach(user => {
+        let parsedUser = {};
+        parsedUser.id = user.dataValues.id;
+        parsedUser.email = user.dataValues.email;
+        parsedUser.firstName = user.dataValues.firstName;
+        parsedUser.lastName = user.dataValues.lastName;
+        userList.push(parsedUser);
+      });
+      res.json(userList);
+    });
+  }
+});
+
+
   
 module.exports = router;
