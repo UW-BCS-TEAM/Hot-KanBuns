@@ -5,24 +5,6 @@ $(document).ready(function() {
       $(".member-name").text(data.email);
     });
 
+    
 
-    app.get("/", function(req, res) {
-      connection.query("SELECT * FROM projects;", function(err, data) {
-        if (err) {
-          throw err;
-        }
-
-        // Test it.
-        // console.log('The solution is: ', data);
-
-        // Test it.
-        // res.send(data);
-
-        res.render("members", { projects: data });
-      });
     });
-
-
-
-
-  });

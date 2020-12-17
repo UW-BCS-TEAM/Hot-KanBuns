@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+var mysql = require("mysql");
 
 // Import the Sequelize models
 const db = require("../models");
@@ -10,17 +11,17 @@ const db = require("../models");
 router.get("/api/projects/:userID?", (req, res) => {
     // Check for user authentication before making query
     if(!req.user){
-        res.json({Error: "Unauthorized User"});        
+        res.json({Error: "Unauthorized User"});
     }
     if(req.params.userID){
         db.Project.findAll({where: {userid: req.params.userID}}).then(projectData => {
             res.json(projectData);
-        }); 
+        });
     }
     else{
         db.Project.findAll({}).then(projectData => {
             res.json(projectData);
-        });       
+        });
     }
 });
 
@@ -36,7 +37,7 @@ router.post("/api/projects/:userID", (req, res) => {
           }).then(result => {
               res.json({ id: result.insertId });
           });
-    }   
+    }
 });
 
 router.put("/api/projects/:projectID", (req, res) => {
@@ -54,7 +55,7 @@ router.put("/api/projects/:projectID", (req, res) => {
         }).then(projectData => {
             res.json(projectData);
         });
-    }    
+    }
 });
 
 router.delete("/api/projects/:projectID", (req, res) => {
@@ -69,8 +70,22 @@ router.delete("/api/projects/:projectID", (req, res) => {
         }).then(projectData => {
             res.json(projectData);
         });
-    }    
+    }
 });
+
+app.get("/", function(req, res) {
+    //SELECT * FROM projects
+
+    connection.query("SELECT * FROM projects;", function(err, data) {
+      if (err) {
+        return res.status(500).end();
+      }
+
+      res.render('members', {projects: data})
+      //res.json(data);
+    });
+
+  });
 
 
 // Export the router
