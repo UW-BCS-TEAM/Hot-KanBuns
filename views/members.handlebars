@@ -10,40 +10,6 @@
   </div>
 </nav>
 
-<!--modal-->
-<div class="modal fade" id="createModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="createModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="createModalLabel">Create New Project</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <input type="text" class="form-control mb-3" placeholder="Project Name" aria-label="project-name"
-          aria-describedby="basic-addon1">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-          <label class="form-check-label" for="flexRadioDefault1">
-            My Projects
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-          <label class="form-check-label" for="flexRadioDefault2">
-            Team Projects
-          </label>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning">Create</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
 <!-- member name -->
 <div class="container" id="welcome-el">
   <div class="row">
@@ -54,43 +20,25 @@
 </div>
 
 <!-- projects list -->
-<div class="accordion" id="projects-accordion">
-  <div class="accordion-item">
-    <h1 class="accordion-header" id="own-projects">
-      <button class="accordion-button collapsed btn-warning" type="button" data-bs-toggle="collapse"
-        data-bs-target="#collapse-one" aria-expanded="false" aria-controls="collapse-one">
-        My Projects
-      </button>
-    </h1>
-    <div id="collapse-one" class="accordion-collapse collapse" aria-labelledby="heading-one"
-      data-bs-parent="#projects-accordion">
-      <div class="accordion-body">
-        <ul>
-          {{#each projects}}
-          {{/each}}
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h1 class="accordion-header" id="heading-two">
-      <button class="accordion-button collapsed btn-warning" type="button" data-bs-toggle="collapse"
-        data-bs-target="#collapse-two" aria-expanded="false" aria-controls="collapse-two">
-        Team Projects
-      </button>
-    </h1>
-    <div id="collapse-two" class="accordion-collapse collapse" aria-labelledby="heading-two"
-      data-bs-parent="#projects-accordion">
-      <div class="accordion-body">
-       <ul>
-          {{#each projects}}
-          {{/each}}
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
+<h1>My Projects</h1>
 
+<ul>
+  {{#each projects}}
+    <li>
+      <p>
+        {{this.UserId}}. {{this.projectName}}
+
+        <!-- <button data-movieid="{{this.id}}" class="delmovie">Delete</button> -->
+      </p>
+    </li>
+  {{/each}}
+</ul>
+
+
+
+
+
+{{!-- JS --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/members.js"></script>
 <script src="https://code.jquery.com/jquery.js"></script>
