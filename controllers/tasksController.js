@@ -53,7 +53,7 @@ router.get("/tasks", (req, res) => {
         }      
 });
 
-// router.get("/api/tasks/getusers/:taskID?", (req, res) => {
+// router.put("/api/tasks/users/:taskID?", (req, res) => {
 //     // Check for user authentication before making query
 //     if(!req.user){
 //         res.json({Error: "Unauthorized User"});        

@@ -1,69 +1,117 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/logout">
-        Logout
-      </a>
-    </div>
-  </div>
-</nav>
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="container">
+<head>
+  <title>Tasks</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <link href="stylesheets/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/logout">
+          Logout
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
-        <h2>Welcome <span class="member-name"></span></h2>   
+        <h2>Welcome <span class="member-name"></span></h2>
       </div>
     </div>
 
 
-<div> 
-<h2> List of Current Tasks </h2>
-<ul>
-  {{#each tasks}}
-  <li>
-    <p>
-      {{this.id}}. {{this.taskName}}
-    </p>
-  </li>
-  {{/each}}
-</ul>
-</div>
+    <div>
+      <h2> List of Current Tasks </h2>
+      <ul>
+        {{#each tasks}}
+        <li>
+          <p>
+            {{this.id}}. {{this.taskName}}
+          </p>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
 
-<h2>Create new task</h2>
-<form id="createtask" class="button-size">
-   <label for="taskname">Task Name:</label><br>
-  <input type="text" id="taskname" name="taskname"><br>
-  <label for="taskpriority">Task Priority:</label><br>
-  <input type="text" id="taskpriority" name="taskpriority"><br><br>
-  <label for="taskstatus">Task Status:</label><br>
-  <input type="text" id="taskstatus" name="taskstatus"><br><br>
-  <textarea type="text" name="taskdesc" id="taskdesc"></textarea>
-  <button type="submit">Create Task</button>
-</form>
-<br>
-<h3> Update Team Members </h3>
-<select name="drop1" id="AllUsers" size="10" multiple="multiple" style="width:100px;height : 200px">
-</select>
-<input type="button" id="add" value="Add" />
-<select id="TaskUsers" size="10" multiple="multiple" style="width:100px;height : 200px"></select>
-<input type="hidden" id="hidden1" />
-<input type="button" id="remove" value="Remove" />
-</div>
+    <h2>Create new task</h2>
+    <form id="createtask" class="button-size">
+      <label for="taskname">Task Name:</label><br>
+      <input type="text" id="taskname" name="taskname"><br>
+      <label for="taskpriority">Task Priority:</label><br>
+      <input type="text" id="taskpriority" name="taskpriority"><br><br>
+      <label for="taskstatus">Task Status:</label><br>
+      <input type="text" id="taskstatus" name="taskstatus"><br><br>
+      <textarea type="text" name="taskdesc" id="taskdesc"></textarea>
+      <button type="submit">Create Task</button>
+    </form>
+    <br>
+    <h3> Update Team Members </h3>
+    <select name="drop1" id="AllUsers" size="10" multiple="multiple" style="width:100px;height : 200px">
+    </select>
+    <input type="button" id="add" value="Add" />
+    <select id="TaskUsers" size="10" multiple="multiple" style="width:100px;height : 200px"></select>
+    <input type="hidden" id="hidden1" />
+    <input type="button" id="remove" value="Remove" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <div>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Launch demo modal
+    </button>
+     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+           <form id="createproject" class="button-size">
+      <label for="projectname">Project Name:</label><br>
+      <input type="text" id="projectname" name="projectname"><br>
+      <label for="projectdesc">Project Description:</label><br>
+      <textarea type="text" name="projectdesc" id="projectdesc"></textarea>
+     </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Create Project</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 <script type="text/javascript">
 
-$("#createtask").on("submit", function(event) {
+  $("#createtask").on("submit", function (event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
-     // console.log($("#newTaskDesc").val().trim());
-     //console.log($("#newTaskDesc [name=movie]").val().trim()); 
+    // console.log($("#newTaskDesc").val().trim());
+    //console.log($("#newTaskDesc [name=movie]").val().trim()); 
     // [name=plan] will find an element with a "name" attribute equal to the string "plan"
     var newTask = {
       taskname: $("#taskname").val().trim(),
-      taskpriority:$("#taskpriority").val().trim(),
-      taskstatus:$("#taskstatus").val().trim(),
-      taskdesc:$("#taskdesc").val().trim()
+      taskpriority: $("#taskpriority").val().trim(),
+      taskstatus: $("#taskstatus").val().trim(),
+      taskdesc: $("#taskdesc").val().trim()
     };
 
     console.log(newTask);
@@ -73,7 +121,7 @@ $("#createtask").on("submit", function(event) {
       type: "POST",
       data: newTask
     }).then(
-      function() {
+      function () {
         console.log("created new Task");
         // Reload the page to get the updated list
         location.reload();
@@ -81,43 +129,47 @@ $("#createtask").on("submit", function(event) {
     );
   });
 
- $(function () {
 
-        var str = "",
-            inHTML = ""
+  $(function () {
 
-        $.get("/api/users",function(data) {
-          //console.log(data);
+    var str = "",
+      inHTML = ""
 
-           $.each(data, function (i, ob) {
-            inHTML += '<option value="' + ob.id + '">' + ob.firstName + ' ' + ob.lastName + '</option>';
-        });
-        $("#AllUsers").empty().append(inHTML);
-        }); 
+    $.get("/api/users", function (data) {
+      //console.log(data);
 
-       $.get("/api/users/2", function(data1) {
-         inHTML = "";
-         $.each(data1, function (i, ob) {
-            inHTML += '<option value="' + ob.id + '">' + ob.firstName + ' ' + ob.lastName + '</option>';
-        });
-        $("#TaskUsers").empty().append(inHTML);
-       });
+      $.each(data, function (i, ob) {
+        inHTML += '<option value="' + ob.id + '">' + ob.firstName + ' ' + ob.lastName + '</option>';
+      });
+      $("#AllUsers").empty().append(inHTML);
+    });
+
+    $.get("/api/users/2", function (data1) {
+      inHTML = "";
+      $.each(data1, function (i, ob) {
+        inHTML += '<option value="' + ob.id + '">' + ob.firstName + ' ' + ob.lastName + '</option>';
+      });
+      $("#TaskUsers").empty().append(inHTML);
+    });
 
     $('#add').click(function () {
-        inHTML = "";
-    
-        $("#AllUsers option:selected").each(function () {
-            if ($("#TaskUsers option[value=" + $(this).val() + "]").length == 0) {
-                inHTML += '<option value="' + $(this).val() + '">' + $(this).text() + '</option>';
-            }
-        });
-        $("#TaskUsers").append(inHTML);
+      inHTML = "";
+
+      $("#AllUsers option:selected").each(function () {
+        if ($("#TaskUsers option[value=" + $(this).val() + "]").length == 0) {
+          inHTML += '<option value="' + $(this).val() + '">' + $(this).text() + '</option>';
+        }
+      });
+      $("#TaskUsers").append(inHTML);
     });
 
     $('#remove').click(function () {
-        $('#TaskUsers option:selected').remove();
+      $('#TaskUsers option:selected').remove();
     });
-});
- 
-  </script>
+  });
 
+</script>
+
+</body>
+
+</html>
