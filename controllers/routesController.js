@@ -10,8 +10,11 @@ router.get("/", function(req, res) {
     if (req.user) {
       res.redirect("/members");
     }
+
+
     res.render("login");
     //res.sendFile(path.join(__dirname, "../public/signup.html"));
+
 });
 
 router.get("/login", function(req, res) {
@@ -19,8 +22,7 @@ router.get("/login", function(req, res) {
     if (req.user) {
       res.redirect("/members");
     }
-    res.render("login");
-    //res.sendFile(path.join(__dirname, "../public/login.html"));
+    res.render("login");    
 });
 
 router.get("/signup", function(req, res) {
@@ -32,11 +34,9 @@ router.get("/signup", function(req, res) {
     //res.sendFile(path.join(__dirname, "../public/login.html"));
 });
 
-  // Here we've add our isAuthenticated middleware to this route.
-  // If a user who is not logged in tries to access this route they will be redirected to the signup page
+
 router.get("/members", isAuthenticated, function(req, res) {
     res.render("members");
-    //res.sendFile(path.join(__dirname, "../public/members.html"));
 });
 
 // router.get("/tasks", isAuthenticated, function(req, res) {
