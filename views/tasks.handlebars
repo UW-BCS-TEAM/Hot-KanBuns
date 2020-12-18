@@ -1,0 +1,62 @@
+
+ <!-- header -->
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="../images/001-bread-roll.png" alt="" width="30" height="24" class="d-inline-block align-top">
+        Hot-KanBuns
+      </a>
+    </div>
+  </nav>
+
+<!--Body-->
+<h2>Add a Task</h2>
+<form class="create-form">
+  <div class="form-group">
+    <label for="name" class=>Task Name:</label>
+    <input type="text" id="taskname" name="name">
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Task Description:</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1  taskdesc" rows="3"></textarea>
+  </div>
+
+ <div class="form-group" id = "priority">
+    <label for="priority" >Task Priority</label><br>
+    <div class="custom-control custom-radio">
+  <input type="radio" id="customRadio1" name="customRadio1" class="custom-control-input1">
+  <label class="custom-control-label" for="customRadio1">Low</label>
+</div>
+
+    <div class="custom-control custom-radio">
+  <input type="radio" id="customRadio1" name="customRadio1" class="custom-control-input1">
+  <label class="custom-control-label" for="customRadio1">High</label>
+</div>
+   <div class="custom-control custom-radio">
+  <input type="radio" id="customRadio1" name="customRadio1" class="custom-control-input1">
+  <label class="custom-control-label" for="customRadio1">Medium</label>
+</div>
+  </div>
+  </div>
+
+  <br>
+
+<h3> Update Team Members </h3>
+<select name="drop1" id="AllUsers" size="10" multiple="multiple" style="width:100px;height : 200px">
+</select>
+<input type="button" id="add" value="Add" />
+<select id="TaskUsers" size="10" multiple="multiple" style="width:100px;height : 200px"></select>
+<input type="hidden" id="hidden1" />
+<input type="button" id="remove" value="Remove" />
+</div>
+
+
+  <button type="submit">Add Task</button>
+</form>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../public/js/task.js"></script>

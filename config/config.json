@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "WYNN!373sql",
+    "password":"",
     "database": "hot_kanbuns",
     "host": "127.0.0.1",
     "dialect": "mysql"
