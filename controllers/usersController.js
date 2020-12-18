@@ -47,39 +47,44 @@ router.get("/api/user_data", function(req, res) {
     // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         email: req.user.email,
-        id: req.user.id    
-      });  
-    }
-});  
 
-router.get("/api/users/:userID?", async function(req, res){ 
-  if(!req.user){
-    res.json({});
-  }else if(req.params.userID) {
-    db.User.findAll({where: {id: parseInt(req.params.userID) }}).then(function(userData){
-      res.json({
-        id: userData[0].dataValues.id,
-        email: userData[0].dataValues.email,
-        firstName: userData[0].dataValues.firstName,
-        lastName: userData[0].dataValues.lastName
+        id: req.user.id,
+        firstName: req.user.firstName,
+        lastName: req.user.lastName
       });
-    });      
-  }else{
-    db.User.findAll({}).then(function(userData){
-      let userList = [];
-      userData.forEach(user => {
-        let parsedUser = {};
-        parsedUser.id = user.dataValues.id;
-        parsedUser.email = user.dataValues.email;
-        parsedUser.firstName = user.dataValues.firstName;
-        parsedUser.lastName = user.dataValues.lastName;
-        userList.push(parsedUser);
-      });
-      res.json(userList);
-    });
+    }
+});
+
+router.get("/api/users", function(req,res) {
+  if (!req.user) {
+    res.json({Error: "Unauthorized User"});
+  } else {
+    db.User.findAll({}).then(userData => {
+      let resUsers = [];
+              userData.forEach(user => {
+              resUsers.push(user.dataValues);
+             });
+            res.json(resUsers);
+        });
   }
 });
 
+router.get("/api/users/:taskID?", function(req,res) {
+  if (!req.user) {
+    res.json({Error: "Unauthorized User"});
+  } else {
+    db.sequelize.query('select u.firstName, u.lastName, u.id from users u, assignedtasks at where u.id = at.UserId and TaskId = ?',
+  { replacements: [parseInt(req.params.taskID)], type: db.sequelize.QueryTypes.SELECT }).then(userData => {
+    console.log(userData);
+            res.json(userData);
+        });
+  }
+});
+
+
+
+ 
+ 
 
   
 module.exports = router;

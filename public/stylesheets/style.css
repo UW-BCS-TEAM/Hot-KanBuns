@@ -3,7 +3,13 @@ form.login {
   margin-top: 50px;
 }
 
+.accordion {
+  width: 50%;
+  margin: 50px;
+  margin-top: 55px
+}
 
-.project {
-  background-color: whitesmoke;
+#welcome-el {
+  margin: 50px;
+
 }
