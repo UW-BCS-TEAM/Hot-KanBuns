@@ -1,7 +1,6 @@
 {
   "name": "1-Passport-Example",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,9 +15,28 @@
     "express": "^4.17.0",
     "express-handlebars": "^5.2.0",
     "express-session": "^1.16.1",
+    "mysql": "^2.18.1",
     "mysql2": "^1.6.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "sequelize": "^5.22.3"
-  }
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
+    "@typescript-eslint/parser": "^4.10.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UW-BCS-TEAM/Hot-KanBuns.git"
+  },
+  "bugs": {
+    "url": "https://github.com/UW-BCS-TEAM/Hot-KanBuns/issues"
+  },
+  "homepage": "https://github.com/UW-BCS-TEAM/Hot-KanBuns#readme",
+  "description": ""
 }

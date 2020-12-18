@@ -4,9 +4,16 @@
       <img src="../images/001-bread-roll.png" alt="" width="30" height="24" class="d-inline-block align-top">
       Hot-KanBuns
     </a>
-    <button type="button" class="btn btn-warning m-2" data-bs-toggle="modal" data-bs-target="#createModal">Create New
-      Project</button>
-      <a href="/login">Log Out</a>
+
+    <!--create new project-->
+    <div id="create-project">
+      <input type="text" id="name" placeholder="Project Name">
+       <input type="text" id="desc" placeholder="Project Description">
+      <button type="submit" id="create-btn">Create</button>
+    </div>
+
+
+    <a href="/login">Log Out</a>
   </div>
 </nav>
 
@@ -20,29 +27,18 @@
 </div>
 
 <!-- projects list -->
-<h1>My Projects</h1>
+<div class="container">
+  <div class="row">
 
-<ul>
-  {{#each projects}}
-    <li>
-      <p>
-        {{this.UserId}}. {{this.projectName}}
+    <div class="col-md-6">
+      <h3>My Projects</h3>
+      <ul id="my-projects"></ul>
+    </div>
 
-        <!-- <button data-movieid="{{this.id}}" class="delmovie">Delete</button> -->
-      </p>
-    </li>
-  {{/each}}
-</ul>
+    <div class="col-md-6">
+      <h3>All Projects</h3>
+      <ul id="all-projects"></ul>
+    </div>
 
-
-
-
-
-{{!-- JS --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/members.js"></script>
-<script src="https://code.jquery.com/jquery.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
-  integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
-  integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+  </div>
+</div>
