@@ -9,57 +9,57 @@ $(document).ready(function () {
 
 
 
-  $.get("/api/projects").then(function (data) {
+  $.get("/api/projects/:userID?").then(function (data) {
     console.log("data", data);
-    for (i = 0; i < 2;) {
-      const allProjectsEl = $("#all-projects");
-      const listEl = $("<li>");
+  // for (i = 0; i < 2;) {
+  //   const allProjectsEl = $("#all-projects");
+  //   const listEl = $("<li>");
 
 
 
-      listEl.text(data[i].projectName);
+  //   listEl.text(data[i].projectName);
 
-      allProjectsEl.append(listEl);
+  //   allProjectsEl.append(listEl);
 
-      i++
-    }
+  //   i++
+  // }
 
-  });
-
-
-
-  $.get("/api/projects").then(function (data) {
-    for (i = 0; i < 3;) {
-      const myProjectsEl = $("#my-projects");
-      const listEl = $("<li>");
-
-      listEl.text(data[i].projectName);
-
-      myProjectsEl.append(listEl);
-
-      i++
-    }
-  });
-
-
-  //New Project
-  $("#create-btn").on("click", function (event) {
-    event.preventDefault();
+});
 
 
 
-    const newProj = {
-      projectName: $("#name").val().trim(),
-      projectDesc: $("#desc").val().trim()
-    };
-    console.log("new project", newProj)
+$.get("/api/projects").then(function (data) {
+  for (i = 0; i < 3;) {
+    const myProjectsEl = $("#my-projects");
+    const listEl = $("<li>");
 
-    $.post(`/api/projects/${userId}`, newProj).then(function () {
-      console.log("created new project");
+    listEl.text(data[i].projectName);
 
-      // location.reload();
-    }
-    );
-  });
+    myProjectsEl.append(listEl);
+
+    i++
+  }
+});
+
+
+//New Project
+$("#create-btn").on("click", function (event) {
+  event.preventDefault();
+
+
+
+  const newProj = {
+    projectName: $("#name").val().trim(),
+    projectDesc: $("#desc").val().trim()
+  };
+  console.log("new project", newProj)
+
+  $.post(`/api/projects/${userId}`, newProj).then(function () {
+    console.log("created new project");
+
+    // location.reload();
+  }
+  );
+});
 });
 
