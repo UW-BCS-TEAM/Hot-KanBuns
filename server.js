@@ -29,11 +29,13 @@ app.use(passport.session());
 const htmlRoutes = require("./controllers/routesController.js");
 const userRoutes = require("./controllers/usersController.js");
 const projectRoutes = require("./controllers/projectsController.js");
+const taskRoutes = require("./controllers/tasksController.js");
 
 // Assign routes to our server
 app.use(htmlRoutes);
 app.use(userRoutes);
 app.use(projectRoutes);
+app.use(taskRoutes);
 
 
 // Syncing our database and logging a message to the user upon success
