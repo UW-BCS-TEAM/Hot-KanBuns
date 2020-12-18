@@ -11,6 +11,19 @@ $(document).ready(function () {
 
   $.get("/api/projects/:userID?").then(function (data) {
     console.log("data", data);
+
+
+
+
+
+
+
+
+
+
+
+
+    
   // for (i = 0; i < 2;) {
   //   const allProjectsEl = $("#all-projects");
   //   const listEl = $("<li>");
