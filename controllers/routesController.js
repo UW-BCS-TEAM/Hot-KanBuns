@@ -10,8 +10,8 @@ router.get("/", function(req, res) {
     if (req.user) {
       res.redirect("/members");
     }
-    res.render("signup");
-    //res.sendFile(path.join(__dirname, "../public/signup.html"));
+    // else return them to the landing page
+    res.render("login");
 });
 
 router.get("/login", function(req, res) {
@@ -19,20 +19,13 @@ router.get("/login", function(req, res) {
     if (req.user) {
       res.redirect("/members");
     }
-    res.render("login");
-    //res.sendFile(path.join(__dirname, "../public/login.html"));
+    res.render("login");    
 });
 
-  // Here we've add our isAuthenticated middleware to this route.
-  // If a user who is not logged in tries to access this route they will be redirected to the signup page
+// Here we've add our isAuthenticated middleware to this route.
+// If a user who is not logged in tries to access this route they will be redirected to the signup page
 router.get("/members", isAuthenticated, function(req, res) {
     res.render("members");
-    //res.sendFile(path.join(__dirname, "../public/members.html"));
 });
-
-// Catch all unrecognized routes and redirect to a 404 page (This has to be the last route in the list)
-// router.get("*", function(req, res){
-//   res.render("404");
-// });
 
 module.exports = router;

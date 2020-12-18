@@ -57,7 +57,6 @@ router.get("/api/users/:userID?", async function(req, res){
     res.json({});
   }else if(req.params.userID) {
     db.User.findAll({where: {id: parseInt(req.params.userID) }}).then(function(userData){
-      console.log(userData);
       res.json({
         id: userData[0].dataValues.id,
         email: userData[0].dataValues.email,

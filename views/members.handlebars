@@ -15,15 +15,27 @@
         <h2>Welcome <span class="member-name"></span></h2>   
       </div>
     </div>
+    <hr>
 </div>
 <div class="container projects">
   <h1>Current Projects</h1>
-  <ul>
-  {{#each projects}}
-    <h2>{{this.projectName}}</h2>
-    <p>{{this.projectDesc}}</p>
-  {{/each}}
-</ul>
+  <div class="project-list">
+  
+  </div>
+  <hr>
+  <form class="project-form">
+    <h1>Add New Project</h1>
+          <div class="form-group">
+            <label for="projectName">Project Name</label>
+            <input type="text" class="form-control" id="projectName" placeholder="Enter the name of your project">
+          </div>
+          <div class="form-group">
+            <label for="lastNameInput">Project Description</label>
+            <input type="text" class="form-control" id="projectDescription" placeholder="Describe the project">
+          </div> 
+          <button type="submit" class="btn btn-default">Create Project</button>
+  </form>
+   
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

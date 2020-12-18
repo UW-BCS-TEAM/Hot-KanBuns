@@ -7,6 +7,15 @@ const db = require("../models");
 // ---------------------------------
 //          Project Routes
 // ----------------------------------
+router.get("/projects/:projectID", (req, res) => {
+    if(!req.user){
+        res.json({Error: "Unauthorized User"});
+    }else{
+        //res.render("project");
+        // Need to know what page and data to render in handlebars
+    }
+
+});
 router.get("/api/projects/:userID?", (req, res) => {
     // Check for user authentication before making query
     if(!req.user){
