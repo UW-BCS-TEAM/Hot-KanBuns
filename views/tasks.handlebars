@@ -1,46 +1,47 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/logout">
-        Logout
+
+ <!-- header -->
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="../images/001-bread-roll.png" alt="" width="30" height="24" class="d-inline-block align-top">
+        Hot-KanBuns
       </a>
     </div>
+  </nav>
+
+<!--Body-->
+<h2>Add a Task</h2>
+<form class="create-form">
+  <div class="form-group">
+    <label for="name" class=>Task Name:</label>
+    <input type="text" id="taskname" name="name">
   </div>
-</nav>
 
-<div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <h2>Welcome <span class="member-name"></span></h2>   
-      </div>
-    </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Task Description:</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1  taskdesc" rows="3"></textarea>
+  </div>
 
-
-<div> 
-<h2> List of Current Tasks </h2>
-<ul>
-  {{#each tasks}}
-  <li>
-    <p>
-      {{this.id}}. {{this.taskName}}
-    </p>
-  </li>
-  {{/each}}
-</ul>
+ <div class="form-group" id = "priority">
+    <label for="priority" >Task Priority</label><br>
+    <div class="custom-control custom-radio">
+  <input type="radio" id="customRadio1" name="customRadio1" class="custom-control-input1">
+  <label class="custom-control-label" for="customRadio1">Low</label>
 </div>
 
-<h2>Create new task</h2>
-<form id="createtask" class="button-size">
-   <label for="taskname">Task Name:</label><br>
-  <input type="text" id="taskname" name="taskname"><br>
-  <label for="taskpriority">Task Priority:</label><br>
-  <input type="text" id="taskpriority" name="taskpriority"><br><br>
-  <label for="taskstatus">Task Status:</label><br>
-  <input type="text" id="taskstatus" name="taskstatus"><br><br>
-  <textarea type="text" name="taskdesc" id="taskdesc"></textarea>
-  <button type="submit">Create Task</button>
-</form>
-<br>
+    <div class="custom-control custom-radio">
+  <input type="radio" id="customRadio1" name="customRadio1" class="custom-control-input1">
+  <label class="custom-control-label" for="customRadio1">High</label>
+</div>
+   <div class="custom-control custom-radio">
+  <input type="radio" id="customRadio1" name="customRadio1" class="custom-control-input1">
+  <label class="custom-control-label" for="customRadio1">Medium</label>
+</div>
+  </div>
+  </div>
+
+  <br>
+
 <h3> Update Team Members </h3>
 <select name="drop1" id="AllUsers" size="10" multiple="multiple" style="width:100px;height : 200px">
 </select>
@@ -50,74 +51,12 @@
 <input type="button" id="remove" value="Remove" />
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
 
-$("#createtask").on("submit", function(event) {
-    // Make sure to preventDefault on a submit event.
-    event.preventDefault();
-     // console.log($("#newTaskDesc").val().trim());
-     //console.log($("#newTaskDesc [name=movie]").val().trim()); 
-    // [name=plan] will find an element with a "name" attribute equal to the string "plan"
-    var newTask = {
-      taskname: $("#taskname").val().trim(),
-      taskpriority:$("#taskpriority").val().trim(),
-      taskstatus:$("#taskstatus").val().trim(),
-      taskdesc:$("#taskdesc").val().trim()
-    };
+  <button type="submit">Add Task</button>
+</form>
 
-    console.log(newTask);
 
-    // Send the POST request.
-    $.ajax("/api/tasks/1", {
-      type: "POST",
-      data: newTask
-    }).then(
-      function() {
-        console.log("created new Task");
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-  });
-
- $(function () {
-
-        var str = "",
-            inHTML = ""
-
-        $.get("/api/users",function(data) {
-          //console.log(data);
-
-           $.each(data, function (i, ob) {
-            inHTML += '<option value="' + ob.id + '">' + ob.firstName + ' ' + ob.lastName + '</option>';
-        });
-        $("#AllUsers").empty().append(inHTML);
-        }); 
-
-       $.get("/api/users/2", function(data1) {
-         inHTML = "";
-         $.each(data1, function (i, ob) {
-            inHTML += '<option value="' + ob.id + '">' + ob.firstName + ' ' + ob.lastName + '</option>';
-        });
-        $("#TaskUsers").empty().append(inHTML);
-       });
-
-    $('#add').click(function () {
-        inHTML = "";
-    
-        $("#AllUsers option:selected").each(function () {
-            if ($("#TaskUsers option[value=" + $(this).val() + "]").length == 0) {
-                inHTML += '<option value="' + $(this).val() + '">' + $(this).text() + '</option>';
-            }
-        });
-        $("#TaskUsers").append(inHTML);
-    });
-
-    $('#remove').click(function () {
-        $('#TaskUsers option:selected').remove();
-    });
-});
- 
-  </script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../public/js/task.js"></script>
