@@ -8,7 +8,7 @@
     <!--create new project-->
     <div id="create-project">
       <input type="text" id="name" placeholder="Project Name">
-       <input type="text" id="desc" placeholder="Project Description">
+      <input type="text" id="desc" placeholder="Project Description">
       <button type="submit" id="create-btn">Create</button>
     </div>
 
@@ -27,18 +27,25 @@
 </div>
 
 <!-- projects list -->
-<div class="container">
-  <div class="row">
 
-    <div class="col-md-6">
-      <h3>My Projects</h3>
-      <ul id="my-projects"></ul>
-    </div>
 
-    <div class="col-md-6">
-      <h3>All Projects</h3>
-      <ul id="all-projects"></ul>
-    </div>
+<div class="col-md-6">
+<h3>My Projects</h3>
+<ul id="my-projects">
+</ul>
+</div>
 
-  </div>
+
+<div class="col-md-6">
+  <h3>All Projects</h3>
+  <ul>
+  {{#each projects}}
+  <li>
+    {{this.projectName}}
+  </li>
+  {{/each}}
+</ul>
+</div>
+
+</div>
 </div>
