@@ -3,70 +3,121 @@ $(document).ready(function () {
 
   let userId = null;
 
+
+  //Get user name and render list of user's projects
   $.get("/api/user_data").then(function (data) {
-    console.log(data);
     $(".member-name").text(data.email);
 
     userId = data.id;
 
     $.get(`/api/projects/${userId}`, function (data) {
-      console.log("data", data[0].projectName);
-
-      // if (data.projectName !== 0) {
-
-      //   for (var i = 0; i < data.projectName; i++) {
 
 
+      if (data.length !== 0) {
 
-      //     var listEl = $("<li>");
+        for (var i = 0; i < data.length; i++) {
+
+          var listEl = $("<li>");
+          var id = data[i].id;
+
+          //Delete button
+          var deleteBtn = $("<button>");
+          deleteBtn.attr('id', 'delete-btn');
+
+          //Update button
+          var updateBtn = $("<button>");
+          updateBtn.attr('id', 'update-btn');
 
 
-      //     listEl.text(data[i].projectName);
+          listEl.text(data[i].projectName).append(deleteBtn, updateBtn);
 
-      //     $("#my-projects").append(listEl);
+          $("#my-projects").append(listEl);
 
-      //   }
+        }
 
-      // }
+      }
 
+      function deleteBtn() {
+        $.ajax({
+          method: "DELETE",
+          url: "/api/projects/" + id
+        })
+          .then(function () {
+            location.reload();
+          });
+
+      }
+
+      $(".delete-btn").on("click", deleteBtn);
 
     });
+
   });
 
 
+  //Render list of all projects in db
+  $.get("/api/projects", function (data) {
+
+    if (data.length !== 0) {
+
+      for (var i = 0; i < data.length; i++) {
+
+        var list2El = $("<li>");
 
 
-  // function getAllProjects() {
-  //   $.get(`/api/projects/${userId}`, function(data) {
-  //     console.log("projects", data.projectName);
-  //   //   var rowsToAdd = [];
-  //   //   for (var i = 0; i < projectName.length; i++) {
-  //   //     rowsToAdd.push(createAuthorRow(data[i]));
-  //   //   }
-  //   //   renderAuthorList(rowsToAdd);
-  //   //   $("#all-projects").val("");
-  //   // });
-  // });
+        list2El.text(data[i].projectName);
+
+        $("#all-projects").append(list2El);
+
+      }
+
+    }
+
+  });
 
 
-  //New Project
+  //Create new project
   $("#create-btn").on("click", function (event) {
     event.preventDefault();
-
-
 
     const newProj = {
       projectName: $("#name").val().trim(),
       projectDesc: $("#desc").val().trim()
     };
-    console.log("new project", newProj)
 
     $.post(`/api/projects/${userId}`, newProj).then(function () {
-      console.log("created new project");
-
       location.reload();
-    }
-    );
+    });
+
   });
+
+
+  //Update name and description of project
+
+
+  // //Delete project
+  // function deleteButton() {
+
+  //   $.get("/api/projects", function (data) {
+
+  //     if (data.length !== 0) {
+
+  //       for (var i = 0; i < data.length; i++) {
+  //         var id = data[i].id;
+
+
+  //         $.ajax({
+  //           method: "DELETE",
+  //           url: "/api/projects/" + id
+  //         })
+  //           .then(function () {
+  //             location.reload();
+  //           });
+
+  //       }
+  //     }
+  //   });
+  // }
+
 
 });
