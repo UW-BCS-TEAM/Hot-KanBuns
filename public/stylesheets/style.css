@@ -1,15 +1,39 @@
+#welcome-el {
+  margin: 50px;
+
+}
+
 form.signup,
 form.login {
   margin-top: 50px;
 }
-
-.accordion {
-  width: 50%;
-  margin: 50px;
-  margin-top: 55px
+.card {
+  position: relative;
+  min-width: 0;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .5rem;
+  margin: 1rem;
+  font-weight: bolder;
 }
+.card-body {
+  padding: 1.25rem;
+  font-weight: bolder;
+}
+.card-header {
+  padding: 1.25rem;
+  background-color: rgba(0,0,0,.03);
+  border-bottom: 1px solid rgba(0,0,0,.125);
+}
+.float-btn-right {
+  display:flex;
+  justify-content: flex-end;
+}
+/* 
+body {
+  background-image: url("../../bg.jpg");
+} */
 
-#welcome-el {
-  margin: 50px;
-
+.col-md-4 h2 {
+  text-align: center;
 }

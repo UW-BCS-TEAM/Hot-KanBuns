@@ -5,21 +5,30 @@ const router = express.Router();
 const db = require("../models");
 
 // ---------------------------------
-//          Project Routes
+//          Task Routes
 // ----------------------------------
-router.get("/api/tasks/:taskID?", (req, res) => {
+router.get("/api/tasks/:projectID?", (req, res) => {
     // Check for user authentication before making query
     if(!req.user){
         res.json({Error: "Unauthorized User"});        
     }
-    if(req.params.taskID){
-        db.Task.findAll({where: {id: req.params.taskID}}).then(taskData => {
-             let resTasks = [];
+    if(req.params.projectID){
+        db.Task.findAll({where: {ProjectId: req.params.projectID}}).then(taskData => {
+             let inProgressTasks = [];
+             let todoTasks = [];
+             let completedTasks = [];
+             
               taskData.forEach(task => {
-              resTasks.push(task.dataValues);
+                  if(task.dataValues.taskStatus === "todo"){
+                    todoTasks.push(task.dataValues);
+                  }else if(task.dataValues.taskStatus === "completed"){
+                    completedTasks.push(task.dataValues); 
+                  }else{
+                    inProgressTasks.push(task.dataValues);
+                  }
              });
              //console.log(resTasks);
-            res.render("tasks", { tasks: resTasks });
+            res.render("newTasks", { inProgress: inProgressTasks, todos: todoTasks, done: completedTasks });
         }); 
     }
     else{
@@ -30,7 +39,7 @@ router.get("/api/tasks/:taskID?", (req, res) => {
               resTasks.push(task.dataValues);
              });
              //console.log(resTasks);
-            res.render("tasks", { tasks: resTasks });
+            res.render("newTasks", { tasks: resTasks });
         });       
     }
 });
@@ -45,10 +54,13 @@ router.get("/tasks", (req, res) => {
               //console.log(taskData);
               let resTasks = [];
               taskData.forEach(task => {
+                  if(task.dataValues.taskPriority === "todo"){
+                      
+                  }
               resTasks.push(task.dataValues);
              });
              //console.log(resTasks);
-            res.render("tasks", { tasks: resTasks });
+            res.render("newTasks", { todos: resTasks });
         }); 
         }      
 });
@@ -117,7 +129,7 @@ router.delete("/api/tasks/:taskID", (req, res) => {
                 id: req.params.taskID
             }
         }).then(projectData => {
-            res.json(projectData);
+            res.status(200).end();
         });
     }    
 });
