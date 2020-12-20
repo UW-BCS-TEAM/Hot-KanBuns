@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
-
 // Import the Sequelize models
 const db = require("../models");
-
 // ---------------------------------
 //          Project Routes
 // ----------------------------------
@@ -14,17 +12,42 @@ router.get("/api/projects/:userID?", (req, res) => {
     }
     if(req.params.userID){
         db.Project.findAll({where: {userid: req.params.userID}}).then(projectData => {
-            res.json(projectData);
+            let projectList = [];
+            projectData.forEach(project => {
+                projectList.push(project.dataValues);
+            });
+            res.json(projectList);
         }); 
     }
     else{
         db.Project.findAll({}).then(projectData => {
-            res.json(projectData);
+            let projectList = [];
+            projectData.forEach(project => {
+                projectList.push(project.dataValues);
+            });
+            res.json(projectList);
         });       
     }
 });
 
+router.get("/api/projectInfo/:projectID", (req,res) => {
+    // Check for user authentication before making query
+    if(!req.user){
+        res.json({Error: "Unauthorized User"});        
+    } else {
+        db.Project.findAll({where: {id: req.params.projectID}}).then(projectData => {
+            let projectList = [];
+            projectData.forEach(project => {
+                projectList.push(project.dataValues);
+            });
+            res.json(projectList);
+        }); 
+    }
+});
+
 router.post("/api/projects/:userID", (req, res) => {
+    console.log(req.body);
+    console.log(req.params);
     // Check for user authentication before making query
     if(!req.user){
         res.json({Error: "Unauthorized User"});
@@ -38,7 +61,6 @@ router.post("/api/projects/:userID", (req, res) => {
           });
     }   
 });
-
 router.put("/api/projects/:projectID", (req, res) => {
     // Check for user authentication before making query
     if(!req.user){
@@ -49,14 +71,13 @@ router.put("/api/projects/:projectID", (req, res) => {
             projectDesc: req.body.projectDesc
         }, {
             where: {
-                id: req.params.projectID
+                id: parseInt(req.params.projectID)
             }
         }).then(projectData => {
             res.json(projectData);
         });
     }    
 });
-
 router.delete("/api/projects/:projectID", (req, res) => {
     // Check for user authentication before making query
     if(!req.user){
@@ -64,14 +85,12 @@ router.delete("/api/projects/:projectID", (req, res) => {
     }else{
         db.Project.destroy({
             where: {
-                id: req.params.projectID
+                id: parseInt(req.params.projectID)
             }
         }).then(projectData => {
             res.json(projectData);
         });
     }    
 });
-
-
 // Export the router
 module.exports = router;

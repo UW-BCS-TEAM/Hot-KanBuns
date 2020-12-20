@@ -8,7 +8,7 @@ const isAuthenticated = require("../config/middleware/isAuthenticated");
 router.get("/", function(req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
-      res.redirect("/members");
+      res.redirect("/projects");
     }
     res.render("login");
     //res.sendFile(path.join(__dirname, "../public/signup.html"));
@@ -17,7 +17,7 @@ router.get("/", function(req, res) {
 router.get("/login", function(req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
-      res.redirect("/members");
+      res.redirect("/projects");
     }
     res.render("login");
     //res.sendFile(path.join(__dirname, "../public/login.html"));
@@ -26,7 +26,7 @@ router.get("/login", function(req, res) {
 router.get("/signup", function(req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
-      res.redirect("/members");
+      res.redirect("/projects");
     }
     res.render("signup");
     //res.sendFile(path.join(__dirname, "../public/login.html"));
@@ -34,8 +34,8 @@ router.get("/signup", function(req, res) {
 
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
-router.get("/members", isAuthenticated, function(req, res) {
-    res.render("members");
+router.get("/projects", isAuthenticated, function(req, res) {
+    res.render("projects");
     //res.sendFile(path.join(__dirname, "../public/members.html"));
 });
 
