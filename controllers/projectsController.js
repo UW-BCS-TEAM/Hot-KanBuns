@@ -7,15 +7,6 @@ const db = require("../models");
 // ---------------------------------
 //          Project Routes
 // ----------------------------------
-router.get("/projects/:projectID", (req, res) => {
-    if(!req.user){
-        res.json({Error: "Unauthorized User"});
-    }else{
-        //res.render("project");
-        // Need to know what page and data to render in handlebars
-    }
-
-});
 router.get("/api/projects/:userID?", (req, res) => {
     // Check for user authentication before making query
     if(!req.user){
@@ -35,8 +26,8 @@ router.get("/api/projects/:userID?", (req, res) => {
             let projectList = [];
             projectData.forEach(project => {
                 projectList.push(project.dataValues);
-            })
-            res.render("members", {projects: projectList});
+            });
+            res.json(projectList);
         });       
     }
 });
@@ -66,7 +57,7 @@ router.put("/api/projects/:projectID", (req, res) => {
             projectDesc: req.body.projectDesc
         }, {
             where: {
-                id: req.params.projectID
+                id: parseInt(req.params.projectID)
             }
         }).then(projectData => {
             res.json(projectData);
@@ -81,7 +72,7 @@ router.delete("/api/projects/:projectID", (req, res) => {
     }else{
         db.Project.destroy({
             where: {
-                id: req.params.projectID
+                id: parseInt(req.params.projectID)
             }
         }).then(projectData => {
             res.json(projectData);
