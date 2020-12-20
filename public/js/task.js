@@ -15,7 +15,7 @@ formtask.on("submit", function(event){
         progress:  taskStatus.val().trim()
     }
 
-   
+
    // Send the POST request.
    $.ajax("/api/tasks/1", {
     type: "POST",
@@ -41,7 +41,7 @@ $(function () {
         inHTML += '<option value="' + ob.id + '">' + ob.firstName + ' ' + ob.lastName + '</option>';
     });
     $("#AllUsers").empty().append(inHTML);
-    }); 
+    });
    $.get("/api/users/2", function(data1) {
      inHTML = "";
      $.each(data1, function (i, ob) {
