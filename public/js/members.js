@@ -3,6 +3,8 @@ $(document).ready(function () {
 
   let userId = null;
 
+  let projectId = null;
+
 
   //Get user name and render list of user's projects
   $.get("/api/user_data").then(function (data) {
@@ -18,7 +20,8 @@ $(document).ready(function () {
         for (var i = 0; i < data.length; i++) {
 
           var listEl = $("<li>");
-          var id = data[i].id;
+          projectId = data[i].id;
+
 
           //Delete button
           var deleteBtn = $("<button>");
@@ -33,22 +36,11 @@ $(document).ready(function () {
 
           $("#my-projects").append(listEl);
 
+
+
         }
 
       }
-
-      function deleteBtn() {
-        $.ajax({
-          method: "DELETE",
-          url: "/api/projects/" + id
-        })
-          .then(function () {
-            location.reload();
-          });
-
-      }
-
-      $(".delete-btn").on("click", deleteBtn);
 
     });
 
@@ -95,29 +87,18 @@ $(document).ready(function () {
   //Update name and description of project
 
 
-  // //Delete project
-  // function deleteButton() {
+  //Delete project
+  $("#delete-btn").on("click", function (event) {
+    event.preventDefault(); {
 
-  //   $.get("/api/projects", function (data) {
-
-  //     if (data.length !== 0) {
-
-  //       for (var i = 0; i < data.length; i++) {
-  //         var id = data[i].id;
-
-
-  //         $.ajax({
-  //           method: "DELETE",
-  //           url: "/api/projects/" + id
-  //         })
-  //           .then(function () {
-  //             location.reload();
-  //           });
-
-  //       }
-  //     }
-  //   });
-  // }
-
+      $.ajax({
+        method: "DELETE",
+        url: `/api/projects/${projectId}`
+      })
+        .then(function () {
+          location.reload();
+        });
+    }
+  });
 
 });
