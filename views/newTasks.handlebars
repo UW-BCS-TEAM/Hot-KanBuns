@@ -1,151 +1,154 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#"><img src="../images/logo.png" alt=""></a>
 
+        {{!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+            aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button> --}}
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">HOT-KANBUNS LOGO</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <div class="navbar-form navbar-right">
-                    LOGOUT
-                </div>
-            </div>
-            <!--/.navbar-collapse -->
-        </div>
-    </nav>
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <div class="container">
-            <h1>Project Name</h1>
-            <p>Project Description</p>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+        <div class="navbar-form navbar-right">
+            <b><a href="/logout">LOGOUT</a></b>
         </div>
     </div>
+</nav>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
     <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-            <div class="col-md-4">
-                <h2>TO DO</h2>                
-                {{#each todos}}
-                
-                <div class="card">
-                    <div class="card-header">
-                        {{this.taskName}}
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{this.taskPriority}}</h5>
-                        <p class="card-text">{{this.taskDesc}}</p>
-                        <div class="float-btn-right">
-                            <button class="btn btn-primary task-edit" data-id="{{this.id}}" data-toggle="modal" data-target="#updateTask"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-primary task-delete" data-id="{{this.id}}"><i class="fa fa-trash"></i></button>
-                        </div>
+        <h1>Project Name</h1>
+        <p>Project Description</p>
+    </div>
+</div>
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-4">
+            <h2>TO DO</h2>
+            {{#each todos}}
+
+            <div class="card">
+                <div class="card-header">
+                    {{this.taskName}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{this.taskPriority}}</h5>
+                    <p class="card-text">{{this.taskDesc}}</p>
+                    <div class="float-btn-right">
+                        <button class="btn btn-primary task-edit" data-id="{{this.id}}" data-toggle="modal"
+                            data-target="#updateTask"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-primary task-delete" data-id="{{this.id}}"><i
+                                class="fa fa-trash"></i></button>
                     </div>
                 </div>
-                {{/each}}
-                <button class="btn btn-secondary" id="add-task-btn">Add New Task</button>
-            </div> 
-            <div class="col-md-4">
-                <h2>IN PROGRESS</h2>
-                {{#each inProgress}}
-                <div class="card">
-                    <div class="card-header">
-                        {{this.taskName}}
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{this.taskPriority}}</h5>
-                        <p class="card-text">{{this.taskDesc}}</p>
-                        <div class="float-btn-right">
-                            <button class="btn btn-primary task-edit" data-id="{{this.id}}" data-toggle="modal" data-target="#updateTask"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-primary task-delete" data-id="{{this.id}}"><i class="fa fa-trash"></i></button>
-                        </div>
-                    </div>
-                </div>
-                {{/each}}
             </div>
-            <div class="col-md-4">
-                <h2>DONE</h2>
-                {{#each done}}
-                <div class="card">
-                    <div class="card-header">
-                        {{this.taskName}}
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{this.taskPriority}}</h5>
-                        <p class="card-text">{{this.taskDesc}}</p>
-                        <div class="float-btn-right">
-                            <button class="btn btn-primary task-edit" data-id="{{this.id}}" data-toggle="modal" data-target="#updateTask"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-primary task-delete" data-id="{{this.id}}"><i class="fa fa-trash"></i></button>
-                        </div>
-                    </div>
-                </div>
-                {{/each}}
-            </div>
+            {{/each}}
+            <button class="btn btn-secondary" id="add-task-btn">Add New Task</button>
         </div>
-        <hr>
-        <footer>
-            <p class="footer">&copy; 2020 UW BCS Team, Inc.</p>
-        </footer>
-        <div class="modal fade" id="updateTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-body">
+        <div class="col-md-4">
+            <h2>IN PROGRESS</h2>
+            {{#each inProgress}}
+            <div class="card">
+                <div class="card-header">
+                    {{this.taskName}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{this.taskPriority}}</h5>
+                    <p class="card-text">{{this.taskDesc}}</p>
+                    <div class="float-btn-right">
+                        <button class="btn btn-primary task-edit" data-id="{{this.id}}" data-toggle="modal"
+                            data-target="#updateTask"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-primary task-delete" data-id="{{this.id}}"><i
+                                class="fa fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <div class="col-md-4">
+            <h2>DONE</h2>
+            {{#each done}}
+            <div class="card">
+                <div class="card-header">
+                    {{this.taskName}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{this.taskPriority}}</h5>
+                    <p class="card-text">{{this.taskDesc}}</p>
+                    <div class="float-btn-right">
+                        <button class="btn btn-primary task-edit" data-id="{{this.id}}" data-toggle="modal"
+                            data-target="#updateTask"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-primary task-delete" data-id="{{this.id}}"><i
+                                class="fa fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    <hr>
+    <footer>
+        <p class="footer">&copy; 2020 UW BCS Team, Inc.</p>
+    </footer>
+    <div class="modal fade" id="updateTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
                     <form id="taskUpdate">
                         <div class="form-group">
-                          <label for="taskname">Task Name</label>
-                          <input type="text" class="form-control" id="taskname" placeholder="">
+                            <label for="taskname">Task Name</label>
+                            <input type="text" class="form-control" id="taskname" placeholder="">
                         </div>
                         <div class="form-group">
                             <label for="taskdesc">Task Description</label>
                             <textarea class="form-control" id="taskdesc" rows="4"></textarea>
-                          </div>
+                        </div>
                         <div class="form-group">
-                          <label for="taskpriority">Task Priority</label>
-                          <select class="form-control" id="taskpriority">
-                            <option>High</option>
-                            <option>Medium</option>
-                            <option>Low</option>
-                          </select>
+                            <label for="taskpriority">Task Priority</label>
+                            <select class="form-control" id="taskpriority">
+                                <option>High</option>
+                                <option>Medium</option>
+                                <option>Low</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="taskstatus">Task Status</label>
                             <select class="form-control" id="taskstatus">
-                              <option>TO DO</option>
-                              <option>IN PROGRESS</option>
-                              <option>DONE</option>
+                                <option>TO DO</option>
+                                <option>IN PROGRESS</option>
+                                <option>DONE</option>
                             </select>
-                          </div>
-                        <div class="form-group">
-                             <h5>Update Team Members</h5> 
-                             <label for="name">Framework:</label>
-                             <input type="text" id="name" placeholder="Enter a framework" autocomplete="off">
-                             <button id="btnAdd">Add</button>
-                             <label for="list">Framework List:</label>
-                             <select id="list" name="list" multiple>
-                             </select>
-                             <button id="btnRemove">Remove Selected Framework</button>
                         </div>
-                      </form>
-                  </div>
-                  <div class="modal-footer">
+                        <div class="form-group">
+                            <h5>Update Team Members</h5>
+                            <label for="name">Framework:</label>
+                            <input type="text" id="name" placeholder="Enter a framework" autocomplete="off">
+                            <button id="btnAdd">Add</button>
+                            <label for="list">Framework List:</label>
+                            <select id="list" name="list" multiple>
+                            </select>
+                            <button id="btnRemove">Remove Selected Framework</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-primary">Update Task</button>
-                  </div>
                 </div>
-              </div>
             </div>
-    </div> <!-- /container -->
-    <!-- Bootstrap core JavaScript
+        </div>
+    </div>
+</div> <!-- /container -->
+<!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/fontawesome.min.js"></script>
-    <script type="text/javascript" src="/js/task-Scott.js"></script>
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/fontawesome.min.js"></script>
+<script type="text/javascript" src="/js/task-Scott.js"></script>

@@ -6,9 +6,9 @@ const router = express.Router();
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 router.get("/", function(req, res) {
-    // If the user already has an account send them to the members page
+    // If the user already has an account send them to the projects page
     if (req.user) {
-      res.redirect("/members");
+      res.redirect("/projects");
     }
 
 
@@ -18,30 +18,30 @@ router.get("/", function(req, res) {
 });
 
 router.get("/login", function(req, res) {
-    // If the user already has an account send them to the members page
+    // If the user already has an account send them to the projects page
     if (req.user) {
-      res.redirect("/members");
+      res.redirect("/projects");
     }
-    res.render("login");    
+    res.render("login");
 });
 
 router.get("/signup", function(req, res) {
-    // If the user already has an account send them to the members page
+    // If the user already has an account send them to the projects page
     if (req.user) {
-      res.redirect("/members");
+      res.redirect("/projects");
     }
     res.render("signup");
     //res.sendFile(path.join(__dirname, "../public/login.html"));
 });
 
 
-router.get("/members", isAuthenticated, function(req, res) {
-    res.render("members");
+router.get("/projects", isAuthenticated, function(req, res) {
+    res.render("projects");
 });
 
 // router.get("/tasks", isAuthenticated, function(req, res) {
 //     res.render("tasks");
-//     //res.sendFile(path.join(__dirname, "../public/members.html"));
+//     //res.sendFile(path.join(__dirname, "../public/projects.html"));
 // });
 
 module.exports = router;
