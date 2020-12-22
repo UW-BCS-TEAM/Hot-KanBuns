@@ -34,10 +34,10 @@ router.get("/signup", function(req, res) {
 
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
-router.get("/projects", isAuthenticated, function(req, res) {
-    res.render("projects");
-    //res.sendFile(path.join(__dirname, "../public/members.html"));
-});
+// router.get("/projects", isAuthenticated, function(req, res) {
+//     res.render("projects");
+//     //res.sendFile(path.join(__dirname, "../public/members.html"));
+// });
 
 // router.get("/tasks", isAuthenticated, function(req, res) {
 //     res.render("tasks");

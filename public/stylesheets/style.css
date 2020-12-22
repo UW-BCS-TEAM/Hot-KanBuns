@@ -7,6 +7,7 @@ form.signup,
 form.login {
   margin-top: 50px;
 }
+
 .card {
   position: relative;
   min-width: 0;
@@ -46,8 +47,20 @@ body {
 /* Hide and Show: */
 .hide {
   display: none;
-  }
+}
   
 .show {
   display: block;
-  }
+}
+
+.col-md-4 h2{
+  text-align: center;
+}
+
+.col-md-6 h2 {
+  text-align: center;
+}
+
+.task-add {
+  color: white;
+}

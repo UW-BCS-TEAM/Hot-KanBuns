@@ -1,6 +1,13 @@
 use hot_kanbuns;
-
-INSERT INTO projects (projectName, projectDesc, userid, createdAt, updatedAt) VALUES ("Project 1", "This is a test project", 1, CURRENT_DATE(), current_date());
-INSERT INTO projects (projectName, projectDesc, userid, createdAt, updatedAt) VALUES ("Project 2", "This is another test project", 1, CURRENT_DATE(), current_date());
-INSERT INTO projects (projectName, projectDesc, userid, createdAt, updatedAt) VALUES ("Project 3", "This is yet another test project", 1, CURRENT_DATE(), current_date());
-
+select * from tasks;
+insert into tasks(taskName, taskDesc, taskStatus, taskPriority, createdAt, updatedAt, ProjectId)
+values
+("task 1", "first task", "inProgress", "low", current_date(), current_date(), 2),
+("task 2", "second task", "todo", "low", current_date(), current_date(), 2),
+("task 3", "third task", "todo", "low", current_date(), current_date(), 2),
+("task 4", "fourth task", "todo", "low", current_date(), current_date(), 2),
+("task 5", "fifth task", "inProgress", "low", current_date(), current_date(), 2),
+("task 6", "sixth task", "todo", "low", current_date(), current_date(), 2),
+("task 7", "seventh task", "todo", "low", current_date(), current_date(), 2),
+("task 8", "eighth task", "completed", "low", current_date(), current_date(), 2),
+("task 9", "ninth task", "completed", "low", current_date(), current_date(), 2),
