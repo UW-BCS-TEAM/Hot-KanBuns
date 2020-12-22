@@ -96,7 +96,7 @@ router.put("/api/taskUsers/:taskID", (req,res) => {
     } else {
         db.sequelize.query(`delete from assignedTasks where TaskId = ${req.params.taskID} `).then(([results, metadata]) => {
             req.body.selectedUsers.forEach(userid => {
-                db.sequelize.query(`insert into assignedtasks (TaskId,UserId,createdAt,updatedAt) values(${req.params.taskID},${userid},CURRENT_DATE(),CURRENT_DATE())`).then(([results, metadata]) => {
+                db.sequelize.query(`insert into assignedTasks (TaskId,UserId,createdAt,updatedAt) values(${req.params.taskID},${userid},CURRENT_DATE(),CURRENT_DATE())`).then(([results, metadata]) => {
                     res.status(200).end();
                 })
             })
