@@ -84,7 +84,7 @@ router.post("/api/tasks/:projectID", (req, res) => {
     if(!req.user){
         res.json({Error: "Unauthorized User"});
     } else {
-        db.sequelize.query(`insert into tasks (taskName,taskDesc,taskStatus,taskPriority,createdAt,updatedAt,projectId) values ("${req.body.taskname}","${req.body.taskdesc}","${req.body.taskstatus}","${req.body.taskpriority}",current_date(),current_date(),${parseInt(req.params.projectID)});`).then(([results, metadata]) => {
+        db.sequelize.query(`insert into Tasks (taskName,taskDesc,taskStatus,taskPriority,createdAt,updatedAt,projectId) values ("${req.body.taskname}","${req.body.taskdesc}","${req.body.taskstatus}","${req.body.taskpriority}",current_date(),current_date(),${parseInt(req.params.projectID)});`).then(([results, metadata]) => {
             res.json({ id: results });
           });
     }   
@@ -94,9 +94,9 @@ router.put("/api/taskUsers/:taskID", (req,res) => {
     if(!req.user){
         res.json({Error: "Unauthorized User"});
     } else {
-        db.sequelize.query(`delete from assignedtasks where TaskId = ${req.params.taskID} `).then(([results, metadata]) => {
+        db.sequelize.query(`delete from assignedTasks where TaskId = ${req.params.taskID} `).then(([results, metadata]) => {
             req.body.selectedUsers.forEach(userid => {
-                db.sequelize.query(`insert into assignedtasks (TaskId,UserId,createdAt,updatedAt) values(${req.params.taskID},${userid},CURRENT_DATE(),CURRENT_DATE())`).then(([results, metadata]) => {
+                db.sequelize.query(`insert into assignedTasks (TaskId,UserId,createdAt,updatedAt) values(${req.params.taskID},${userid},CURRENT_DATE(),CURRENT_DATE())`).then(([results, metadata]) => {
                     res.status(200).end();
                 })
             })

@@ -74,7 +74,7 @@ router.get("/api/users/:taskID", function(req,res) {
     res.json({Error: "Unauthorized User"});
   }
   else {
-    db.sequelize.query('select u.firstName, u.lastName, u.id from users u, assignedtasks at where u.id = at.UserId and TaskId = ?',
+    db.sequelize.query('select u.firstName, u.lastName, u.id from Users u, assignedTasks at where u.id = at.UserId and TaskId = ?',
   { replacements: [parseInt(req.params.taskID)], type: db.sequelize.QueryTypes.SELECT }).then(userData => {
     console.log(userData);
             res.json(userData);
