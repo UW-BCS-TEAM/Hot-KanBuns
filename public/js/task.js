@@ -103,11 +103,18 @@ $(".task-edit").on("click", function () {
 
         let inHTML = "";
         $.get(`/api/users/${taskID}`, function (data) {
-            console.log(data);
             $.each(data, function (i, ob) {
                 inHTML += '<option value="' + ob.id + '">' + ob.firstName + ' ' + ob.lastName + '</option>';
             });
             $("#updated-users-select-to").empty().append(inHTML);
+
+            $('#updated-users-select-to option').each(function () {
+                let users_val = $(this).val();
+                $('#updated-users-select-from option').each(function () {
+                    if ($(this).val() === users_val)
+                     $(this).remove();
+                });  
+            });
             $('#updateTask').modal('show');
         });
     });
