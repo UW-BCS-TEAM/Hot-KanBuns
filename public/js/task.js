@@ -1,66 +1,151 @@
+let url = window.location.href;
+let pos = url.lastIndexOf("/");
+let projectId = url.slice(pos + 1);
 
-$(document).ready(function() {
-    var formtask = $("form.create-form")
-    var taskName= $("input#taskname");
-    var taskDesc = $("input#taskdesc");
-    var taskPriority = $("input.prioritylevel");
-    var taskStatus = $("input.priorityprogress");
+$(document).ready(() => {
 
-formtask.on("submit", function(event){
-    event.preventDefault();
-    var taskData = {
-        name: taskName.val().trim(),
-        description:taskDesc.val().trim(),
-        level: taskPriority.val().trim(),
-        progress:  taskStatus.val().trim()
-    }
-
-
-   // Send the POST request.
-   $.ajax("/api/tasks/1", {
-    type: "POST",
-    data: taskData
-  }).then(
-    function() {
-      console.log("created new Task");
-      // Reload the page to get the updated list
-      location.reload();
-    }
-  );
-
+    $.get(`/api/projectInfo/${projectId}`,function (data){
+        console.log(data[0].projectName);
+        console.log(data[0].projectDesc);
+        $("#project-name").html(`<h1>${data[0].projectName}</h1>`);
+        $("#project-description").html(`<p>${data[0].projectDesc}</p>`);
     })
-})
 
-
-$(function () {
-    var str = "",
-        inHTML = ""
-    $.get("/api/users",function(data) {
-      //console.log(data);
-       $.each(data, function (i, ob) {
-        inHTML += '<option value="' + ob.id + '">' + ob.firstName + ' ' + ob.lastName + '</option>';
+    let inHTML = "";
+    $.get("/api/users", function (data) {
+        $.each(data, function (i, ob) {
+            inHTML += '<option value="' + ob.id + '">' + ob.firstName + ' ' + ob.lastName + '</option>';
+        });
+        $("#updated-users-select-from").empty().append(inHTML);
+        $("#new-users-select-from").empty().append(inHTML);
     });
-    $("#AllUsers").empty().append(inHTML);
-    });
-   $.get("/api/users/2", function(data1) {
-     inHTML = "";
-     $.each(data1, function (i, ob) {
-        inHTML += '<option value="' + ob.id + '">' + ob.firstName + ' ' + ob.lastName + '</option>';
-    });
-    $("#TaskUsers").empty().append(inHTML);
-   });
-$('#add').click(function () {
-    inHTML = "";
-
-    $("#AllUsers option:selected").each(function () {
-        if ($("#TaskUsers option[value=" + $(this).val() + "]").length == 0) {
-            inHTML += '<option value="' + $(this).val() + '">' + $(this).text() + '</option>';
-        }
-    });
-    $("#TaskUsers").append(inHTML);
 });
-$('#remove').click(function () {
-    $('#TaskUsers option:selected').remove();
+
+$('#btn-add-update').click(function () {
+    $('#updated-users-select-from option:selected').each(function () {
+        $('#updated-users-select-to').append("<option value='" + $(this).val() + "'>" + $(this).text() + "</option>");
+        $(this).remove();
+    });
 });
+
+$(".task-delete").on("click", function () {
+    let taskID = $(this).data("id");
+
+    $.ajax({
+        url: `/api/tasks/${taskID}`,
+        method: "DELETE"
+    }).then(() => {
+        console.log("Task Deleted!");
+        location.reload();
+    });
+
+});
+
+$('#btn-remove-update').click(function () {
+    $('#updated-users-select-to option:selected').each(function () {
+        $('#updated-users-select-from').append("<option value='" + $(this).val() + "'>" + $(this).text() + "</option>");
+        $(this).remove();
+    });
+});
+
+$('#btn-add-new').click(function () {
+    $('#new-users-select-from option:selected').each(function () {
+        $('#new-users-select-to').append("<option value='" + $(this).val() + "'>" + $(this).text() + "</option>");
+        $(this).remove();
+    });
+});
+
+$('#btn-remove-new').click(function () {
+    $('#new-users-select-to option:selected').each(function () {
+        $('#new-users-select-from').append("<option value='" + $(this).val() + "'>" + $(this).text() + "</option>");
+        $(this).remove();
+    });
+});
+
+$("#task-add").on("click", function () {
+
+    const newTask = {
+        taskname: $("#newtaskname").val().trim(),
+        taskdesc: $("#newtaskdesc").val().trim(),
+        taskpriority: $("#newtaskpriority").val().trim(),
+        taskstatus: $("#newtaskstatus").val().trim()
+    };
+
+    $("#task-add").attr('data-dismiss', 'modal');
+
+    $.post(`/api/tasks/${projectId}`, newTask).then(function (res) {
+        console.log("created new task");
+        console.log(res);
+        let selectedtaskID = res.id;
+        let selectedUsers = $.map($('#new-users-select-to option') ,function(option) {
+            return option.value;
+           });
+
+        const newtaskusers = {selectedUsers:selectedUsers};
+        $.ajax({
+            url: `/api/taskUsers/${selectedtaskID}`,
+            type: 'put',
+            data: newtaskusers
+          }).then(function (res1) {
+            location.reload();
+          });
+       });
+});
+
+$(".task-edit").on("click", function () {
+    let taskID = $(this).data("id");
+    $.get(`/api/taskInfo/${taskID}`, function (data) {
+        $("#updatedtaskid").text(data[0].id);
+        $("#updatedtaskname").val(data[0].taskName);
+        $("#updatedtaskdesc").val(data[0].taskDesc);
+        $("#updatedtaskstatus").val(data[0].taskStatus);
+        $("#updatedtaskpriority").val(data[0].taskPriority);
+
+        let inHTML = "";
+        $.get(`/api/users/${taskID}`, function (data) {
+            console.log(data);
+            $.each(data, function (i, ob) {
+                inHTML += '<option value="' + ob.id + '">' + ob.firstName + ' ' + ob.lastName + '</option>';
+            });
+            $("#updated-users-select-to").empty().append(inHTML);
+            $('#updateTask').modal('show');
+        });
+    });
+});
+
+$("#task-update").on("click", function () {
+
+    let selectedtaskID = $("#updatedtaskid").text();
+
+    const updatedTask = {
+        taskname: $("#updatedtaskname").val().trim(),
+        taskdesc: $("#updatedtaskdesc").val().trim(),
+        taskpriority: $("#updatedtaskpriority").val().trim(),
+        taskstatus: $("#updatedtaskstatus").val().trim()
+    };
+
+    $("#task-update").attr('data-dismiss', 'modal');
+
+    $.ajax({
+        url: `/api/tasks/${selectedtaskID}`,
+        type: 'put',
+        data: updatedTask
+      }).then(function (res) {
+
+        let selectedUsers = $.map($('#updated-users-select-to option') ,function(option) {
+            return option.value;
+           });
+
+        console.log(selectedUsers);
+        const updatedtaskusers = {selectedUsers:selectedUsers};
+        $.ajax({
+            url: `/api/taskUsers/${selectedtaskID}`,
+            type: 'put',
+            data: updatedtaskusers
+          }).then(function (res1) {
+            console.log(res1);
+            location.reload();
+          });
+      });
 });
 

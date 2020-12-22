@@ -1,116 +1,224 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#"><img src="../images/logo.png" alt=""></a>
-
-        {{!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+        <a class="navbar-brand" href="#"><img src="/images/logo.png" alt=""></a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
             aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-        </button> --}}
-
+        </button>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
-        <div class="navbar-form navbar-right">
-            <b><a href="/logout">LOGOUT</a></b>
+    <div class="container">
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="navbar-form navbar-right">
+                <b><a href="/logout">LOGOUT</a></b>
+            </div>
         </div>
     </div>
 </nav>
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <div class="container">
-            <h1>Project Name</h1>
-            <p>Project Description</p>
-        </div>
-    </div>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
     <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-            <div class="col-md-4">
-                <h2>TO DO</h2>
-                <div class="card">
-                    <div class="card-header">
-                        Task 1 Name
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Task Priority</h5>
-                        <p class="card-text">Task Description</p>
-                        <div class="float-btn-right">
-                            <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                            <a href="#" class="btn btn-primary"><i class="fa fa-trash"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        Task 2 Name
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Task Priority</h5>
-                        <p class="card-text">Task Description</p>
-                        <div class="float-btn-right">
-                            <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                            <a href="#" class="btn btn-primary"><i class="fa fa-trash"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        Task 3 Name
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Task Priority</h5>
-                        <p class="card-text">Task Description</p>
-                        <div class="float-btn-right">
-                            <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                            <a href="#" class="btn btn-primary"><i class="fa fa-trash"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <h2>IN PROGRESS</h2>
-                <div class="card">
-                    <div class="card-header">
-                        Task 1 Name
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Task Priority</h5>
-                        <p class="card-text">Task Description</p>
-                        <div class="float-btn-right">
-                            <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                            <a href="#" class="btn btn-primary"><i class="fa fa-trash"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <h2>DONE</h2>
-      <div class="card">
-        <div class="card-header">
-          <span class="task-name"><!-- Task Name Here --></span>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Task Priority</h5>
-          <p class="card-text">Task Description</p>
-          <div class="float-btn-right">
-            <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-            <a href="#" class="btn btn-primary"><i class="fa fa-trash"></i></a>
-          </div>
-        </div>
-      </div>
+        <div id="project-name"></div>
+        <div id="project-description"></div>
+        <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal"
+                            data-target="#createTask">Add Task</button>
     </div>
-  </div>
-  <hr>
-  <footer>
-    <p class="footer">&copy; 2016 Company, Inc.</p>
-  </footer>
+</div>
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-4">
+            <h2>TO DO</h2>
+            {{#each todos}}
+            <div class="card">
+                <div class="card-header">
+                    {{this.taskName}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{this.taskPriority}}</h5>
+                    <p class="card-text">{{this.taskDesc}}</p>
+                    <div class="float-btn-right">
+                        <button class="btn btn-primary task-edit" data-id="{{this.id}}"><i
+                                class="fas fa-edit"></i></button>
+                        <button class="btn btn-primary task-delete" data-id="{{this.id}}"><i
+                                class="fa fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+            {{!-- <button class="btn btn-secondary" >Add New Task</button> --}}
+        </div>
+        <div class="col-md-4">
+            <h2>IN PROGRESS</h2>
+            {{#each inProgress}}
+            <div class="card">
+                <div class="card-header">
+                    {{this.taskName}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{this.taskPriority}}</h5>
+                    <p class="card-text">{{this.taskDesc}}</p>
+                    <div class="float-btn-right">
+                        <button class="btn btn-primary task-edit" data-id="{{this.id}}"><i
+                                class="fas fa-edit"></i></button>
+                        <button class="btn btn-primary task-delete" data-id="{{this.id}}"><i
+                                class="fa fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <div class="col-md-4">
+            <h2>DONE</h2>
+            {{#each done}}
+            <div class="card">
+                <div class="card-header">
+                    {{this.taskName}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{this.taskPriority}}</h5>
+                    <p class="card-text">{{this.taskDesc}}</p>
+                    <div class="float-btn-right">
+                        <button class="btn btn-primary task-edit" data-id="{{this.id}}"><i
+                                class="fas fa-edit"></i></button>
+                        <button class="btn btn-primary task-delete" data-id="{{this.id}}"><i
+                                class="fa fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    <hr>
+    <footer>
+        <p class="footer">&copy; 2020 UW BCS Team, Inc.</p>
+    </footer>
+    <!--Update Task-->
+    <div class="modal fade" id="updateTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form id="taskUpdate">
+                        <div id="updatedtaskid" class="hide"></div>
+                        <div class="form-group">
+                            <label for="taskname">Task Name</label>
+                            <input type="text" class="form-control" id="updatedtaskname" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="taskdesc">Task Description</label>
+                            <textarea class="form-control" id="updatedtaskdesc" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskpriority">Task Priority</label>
+                            <select class="form-control" id="updatedtaskpriority">
+                                <option>High</option>
+                                <option>Medium</option>
+                                <option>Low</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskstatus">Task Status</label>
+                            <select class="form-control" id="updatedtaskstatus">
+                                <option>TO DO</option>
+                                <option>IN PROGRESS</option>
+                                <option>DONE</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <h5>Update Team Members</h5>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <select name="selectfrom" id="updated-users-select-from" multiple size="8"
+                                        class="form-control">
+                                    </select>
+                                </div>
+                                <div class="col-md-4 justify-center">
+                                    <a href="JavaScript:void(0);" id="btn-add-update">Add &raquo;</a>
+                                    <br><br>
+                                    <a href="JavaScript:void(0);" id="btn-remove-update">&laquo; Remove</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <select name="selectto" id="updated-users-select-to" multiple size="8"
+                                        class="form-control d-flex flex-row">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="task-update">Update Task</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Create Task Modal -->
+    <div class="modal fade" id="createTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form id="taskcreation">
+                        <div class="form-group">
+                            <label for="newtaskname">Task Name</label>
+                            <input type="text" class="form-control" id="newtaskname" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="newtaskdesc">Task Description</label>
+                            <textarea class="form-control" id="newtaskdesc" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="newtaskpriority">Task Priority</label>
+                            <select class="form-control" id="newtaskpriority">
+                                <option>High</option>
+                                <option>Medium</option>
+                                <option>Low</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="newtaskstatus">Task Status</label>
+                            <select class="form-control" id="newtaskstatus">
+                                <option>TO DO</option>
+                                <option>IN PROGRESS</option>
+                                <option>DONE</option>
+                            </select>
+                        </div>
+                        <h5>Update Team Members</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <select name="selectfrom" id="new-users-select-from" multiple size="8"
+                                    class="form-control">
+                                </select>
+                            </div>
+                            <div class="col-md-4 justify-center">
+                                <a href="JavaScript:void(0);" id="btn-add-new">Add &raquo;</a>
+                                <br><br>
+                                <a href="JavaScript:void(0);" id="btn-remove-new">&laquo; Remove</a>
+                            </div>
+                            <div class="col-md-4">
+                                <select name="selectto" id="new-users-select-to" multiple size="8" class="form-control">
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="task-add">Add Task</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div> <!-- /container -->
 <!-- Bootstrap core JavaScript
-================================================== -->
+    ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/fontawesome.min.js"></script>
+<script type="text/javascript" src="/js/task.js"></script>

@@ -16,7 +16,7 @@ $(document).ready(function () {
       console.log(data);
       const myProjectsEl = $("#my-projects");
       data.forEach(projects => {
-        myProjectsEl.append(`<li><a href=/api/tasks/${projects.id}>${projects.projectName}</a></li>`);
+        myProjectsEl.append(`<li><a href=/tasks/${projects.id}>${projects.projectName}</a></li>`);
         $("#myprojectsselect").append('<option value="' + projects.id + '">' + projects.projectName + '</option>');
         $("#projecttodelete").append('<option value="' + projects.id + '">' + projects.projectName + '</option>');
       });
@@ -26,7 +26,7 @@ $(document).ready(function () {
     $.get("/api/projects").then(function (data) {
       const allProjectsEl = $("#all-projects");
       data.forEach(projects => {
-        allProjectsEl.append(`<li><a href=/api/tasks/${projects.id}>${projects.projectName}</a></li>`);
+        allProjectsEl.append(`<li><a href=/tasks/${projects.id}>${projects.projectName}</a></li>`);
       });
     });
   });
@@ -77,8 +77,6 @@ $("#update-btn").on("click", function (event) {
     projectName: $("#curprojectname").val().trim(),
     projectDesc: $("#curprojectdesc").val().trim()
   };
-  console.log("new project", updatedProj)
-  console.log(`/api/projects/${selectedprojID}`);
 
   $.ajax({
     url: `/api/projects/${selectedprojID}`,

@@ -4,20 +4,6 @@ const router = express.Router();
 // Import the Sequelize models
 const db = require("../models");
 
-// ---------------------------------
-//          Project Routes
-// ----------------------------------
-// router.get("/api/projects/:projectID?", (req, res) => {
-//     if (!req.user) {
-//         res.json({ Error: "Unauthorized User" });
-//     } else {
-//         res.render("members", { projects: projectList });
-
-//         // Need to know what page and data to render in handlebars
-//     }
-
-// });
-
 router.get("/api/projects/:userID?", (req, res) => {
     // Check for user authentication before making query
     if (!req.user) {
@@ -38,6 +24,20 @@ router.get("/api/projects/:userID?", (req, res) => {
             projectData.forEach(project => {
                 projectList.push(project.dataValues);
             })
+            res.json(projectList);
+        });
+    }
+});
+
+router.get("/api/projectInfo/:projectID",(req,res) => {
+    if (!req.user) {
+        res.json({ Error: "Unauthorized User" });
+    } else {
+        db.Project.findAll({ where: { id: req.params.projectID } }).then(projectData => {
+            let projectList = [];
+            projectData.forEach(project => {
+                projectList.push(project.dataValues);
+            });
             res.json(projectList);
         });
     }
