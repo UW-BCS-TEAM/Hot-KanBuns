@@ -1,0 +1,75 @@
+form.signup,
+form.login {
+  margin-top: 50px;
+}
+
+form.signup,
+form.login {
+  margin-top: 50px;
+}
+
+.card {
+  position: relative;
+  min-width: 0;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .5rem;
+  margin: 1rem;
+  font-weight: bolder;
+}
+
+.card-body {
+  padding: 1.25rem;
+  font-weight: bolder;
+}
+
+.card-header {
+  padding: 1.25rem;
+  background-color: rgba(0,0,0,.03);
+  border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.float-btn-right {
+  display:flex;
+  justify-content: flex-end;
+}
+
+.btn {
+  margin:2px;
+  background-color:#007bff;
+}
+
+body {
+  background-image: url("../images/bg.jpg");
+}
+
+.jumbotron {
+  background-color: rgb(243, 243, 243);
+}
+
+.form-control {
+  font-weight: bolder;
+  font-size: 18px;
+  border: 1px solid #000000;
+}
+
+/* Hide and Show: */
+.hide {
+  display: none;
+  }
+
+.show {
+  display: block;
+  }
+
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    height: 50px;
+    display: block;
+}

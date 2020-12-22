@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS hot_kanbuns;
+CREATE DATABASE hot_kanbuns;
