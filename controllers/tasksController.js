@@ -44,6 +44,21 @@ router.get("/api/tasks/:projectID?", (req, res) => {
     }
 });
 
+router.get("/api/taskInfo/:taskID", (req,res) => {
+    if(!req.user){
+        res.json({Error: "Unauthorized User"});        
+    } else {
+        db.Task.findAll({where: {id: req.params.taskID}}).then(taskData => {
+            let resTasks = [];
+            
+             taskData.forEach(task => {
+                   resTasks.push(task.dataValues);
+            });
+            //console.log(resTasks);
+           res.json(resTasks);
+       });
+    }
+})
 router.get("/tasks", (req, res) => {
     // Check for user authentication before making query
     if(!req.user){
@@ -65,42 +80,23 @@ router.get("/tasks", (req, res) => {
         }      
 });
 
-// router.get("/api/tasks/getusers/:taskID?", (req, res) => {
-//     // Check for user authentication before making query
-//     if(!req.user){
-//         res.json({Error: "Unauthorized User"});        
-//     }
-//     if(req.params.taskID){
-//         db.Task.findAll({where: {id: req.params.taskID}}).then(taskData => {
-//              let resTasks = [];
-//               taskData.forEach(task => {
-//               resTasks.push(task.dataValues);
-//              });
-//              console.log(resTasks);
-//             res.render("tasks", { tasks: resTasks });
-//         }); 
-//     }
-// });
-
 router.post("/api/tasks/:projectID", (req, res) => {
     // Check for user authentication before making query
     if(!req.user){
         res.json({Error: "Unauthorized User"});
-    }else{
-        db.Task.create({
-            taskName: req.body.taskname,
-            taskDesc: req.body.taskdesc,
-            taskPriority: req.body.taskpriority,
-            taskStatus: req.body.taskstatus,
-            projectId: parseInt(req.params.projectID)
-          }).then(result => {
-              res.json({ id: result.insertId });
+    } else {
+        db.sequelize.query(`insert into tasks (taskName,taskDesc,taskStatus,taskPriority,createdAt,updatedAt,projectId) values ("${req.body.taskname}","${req.body.taskdesc}","${req.body.taskstatus}","${req.body.taskpriority}",current_date(),current_date(),${parseInt(req.params.projectID)});`).then(([results, metadata]) => {
+            console.log("Number of tasks inserted: " + metadata);
+            console.log("Task ID of newly inserted task: " + metadata);
+            res.json({ id: results });
           });
     }   
 });
 
 router.put("/api/tasks/:taskID", (req, res) => {
     // Check for user authentication before making query
+    console.log(req.body);
+    console.log(req.params.taskID);
     if(!req.user){
         res.json({Error: "Unauthorized User"});
     }else{
@@ -108,7 +104,7 @@ router.put("/api/tasks/:taskID", (req, res) => {
             taskName: req.body.taskname,
             taskDesc: req.body.taskdesc,
             taskPriority:req.body.taskpriority,
-            taskstatus:req.body.taskStatus
+            taskStatus:req.body.taskstatus
         }, {
             where: {
                 id: req.params.taskID
