@@ -41,6 +41,10 @@ $(".task-delete").on("click", function () {
 
 });
 
+$("#task-update-cancel").click(function(){
+    location.reload();
+})
+
 $('#btn-remove-update').click(function () {
     $('#updated-users-select-to option:selected').each(function () {
         $('#updated-users-select-from').append("<option value='" + $(this).val() + "'>" + $(this).text() + "</option>");
