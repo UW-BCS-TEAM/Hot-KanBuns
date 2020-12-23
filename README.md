@@ -16,8 +16,6 @@ I WANT to be able to have a visual of my workflow based on status (To-Do, In Pro
 SO THAT I can better organize and manage my work and my time
 ```
 ### Images with application functionality:
-| Project page    | Task page | 
-|------------|------------|------------|
 | <img src="public/images/project.png" width="300"> | <img src="public/images/task.png" width="300"> |
 ### Tech/framework used:
 * Node.js:
